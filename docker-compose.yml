@@ -1,0 +1,26 @@
+version: '3.4'
+services:
+  minimalapi:
+    image: minimalapi
+    build:
+      context: .
+      dockerfile: .
+    ports:
+      - 8081:80
+    depends_on:
+      - sqldata
+  
+  sqldata:
+   image: mcr.microsoft.com/mssql/server:2022-latest
+   environment:
+    - SA_PASSWORD=Senhaforte@
+    - ACCEPT_EULA=Y
+   volumes:
+    - c:\dados\volumes\mssql:/var/opt/mssql/data
+   ports:
+    - "1433:1433"
+   mem_limit: 3072m
+   mem_reservation: 2048m
+
+
+      
